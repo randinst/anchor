@@ -7,18 +7,11 @@ is...
 - Art provenance (artist records)
 - Purchases with historical significance
 - Court testimony
-
-## Quick Start
-
-1. Copy a schema from `/schemas`
-2. Fill it with your data
-3. Hash it: `shasum -a 256 <(jq -cS . < yourfile.json)`
-4. Anchor to any blockchain
-5. Save proof
+- ...
 
 See SPEC.md for details.
 
-Usage?
+Usage(?)
 
 ```
 const proof = await anchorToEVM(
@@ -27,15 +20,19 @@ const proof = await anchorToEVM(
   privateKey
 );
 ```
-Library Usage?
 
+Library Usage(?)
+
+```
 // Default RPC
 await anchor(data, 'polygon', privateKey);
 
 // Custom RPC
 await anchor(data, 'polygon', privateKey, 'https://my-node.com');
+```
 
-Custom RPC config?
+Custom RPC config(?)
+
 ```
 // Use default public RPC
 prp anchor deed.json --chain polygon
