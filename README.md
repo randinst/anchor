@@ -20,15 +20,19 @@ const proof = await anchorToEVM(
   privateKey
 );
 ```
+
 Library Usage(?)
+
 ```
 // Default RPC
 await anchor(data, 'polygon', privateKey);
 
 // Custom RPC
 await anchor(data, 'polygon', privateKey, 'https://my-node.com');
-``
+```
+
 Custom RPC config(?)
+
 ```
 // Use default public RPC
 prp anchor deed.json --chain polygon
