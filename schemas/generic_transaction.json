@@ -1,0 +1,16 @@
+{
+  "type": "transaction",
+  "parties": [
+    {"name": "Alice", "role": "seller"},
+    {"name": "Bob", "role": "buyer"}
+  ],
+  "subject": "1967 Ford Mustang",
+  "terms": {
+    "price": 50000,
+    "currency": "USD",
+    "date": "2025-10-15"
+  },
+  "details": {
+    // Whatever else is relevant
+  }
+}
