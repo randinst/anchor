@@ -1,16 +1,28 @@
 {
-  "type": "transaction",
-  "parties": [
-    {"name": "Alice", "role": "seller"},
-    {"name": "Bob", "role": "buyer"}
-  ],
-  "subject": "1967 Ford Mustang",
-  "terms": {
-    "price": 50000,
-    "currency": "USD",
-    "date": "2025-10-15"
+  "@context": "https://schema.org/",
+  "@type": "BuyAction",
+  "description": "FILL: Description of what is being sold/transferred",
+  "seller": {
+    "@type": "Person",
+    "name": "FILL: Seller full name",
+    "identifier": "FILL: Optional ID (SSN, passport, etc)"
   },
-  "details": {
-     "text": "Approved purchase at 31 Spooner Street"
+  "buyer": {
+    "@type": "Person",
+    "name": "FILL: Buyer full name",
+    "identifier": "FILL: Optional ID"
+  },
+  "object": {
+    "@type": "Product",
+    "name": "FILL: Item/property name",
+    "description": "FILL: Detailed description",
+    "identifier": "FILL: Serial number, VIN, parcel ID, etc"
+  },
+  "price": "FILL: Amount (number)",
+  "priceCurrency": "USD",
+  "validFrom": "FILL: Date (YYYY-MM-DD)",
+  "location": {
+    "@type": "Place",
+    "address": "FILL: Physical address if applicable"
   }
 }

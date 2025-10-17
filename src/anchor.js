@@ -1,6 +1,6 @@
-// anchor.js
+// anchor.js - Anchor full data to EVM chains
 import { ethers } from 'ethers';
-import crypto from 'crypto';
+import { DEFAULT_RPCS, CHAIN_IDS } from './chains.js';
 
 async function anchorToEVM(data, chainName, privateKey, customRpc = null) {
   const rpcUrl = customRpc || DEFAULT_RPCS[chainName];
@@ -9,30 +9,30 @@ async function anchorToEVM(data, chainName, privateKey, customRpc = null) {
   if (!rpcUrl) throw new Error(`Chain ${chainName} not supported`);
   if (!chainId) throw new Error(`Chain ID not found for ${chainName}`);
   
-  // 1. Hash the data canonically
+  // 1. Canonicalize JSON (sorted keys, no whitespace)
   const canonical = JSON.stringify(data, Object.keys(data).sort());
-  const hash = crypto.createHash('sha256').update(canonical).digest('hex');
   
-  // 2. Connect to chain
+  // 2. Convert to hex for transaction data
+  const dataHex = '0x' + Buffer.from(canonical, 'utf8').toString('hex');
+  
+  // 3. Connect to chain
   const provider = new ethers.JsonRpcProvider(rpcUrl);
   const wallet = new ethers.Wallet(privateKey, provider);
   
-  // 3. Send transaction with hash
+  // 4. Send transaction with full data
   const tx = await wallet.sendTransaction({
     to: wallet.address,
     value: 0,
-    data: '0x' + hash,
+    data: dataHex,
     chainId: chainId
   });
   
-  // 4. Wait for confirmation
+  // 5. Wait for confirmation
   const receipt = await tx.wait();
   
-  // 5. Return proof
+  // 6. Return proof
   return {
-    data: data,
     proof: {
-      hash: hash,
       chain: chainName,
       chainId: chainId,
       txid: receipt.hash,

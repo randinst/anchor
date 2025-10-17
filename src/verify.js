@@ -1,40 +1,54 @@
+// verify.js - Verify proofs by reading from chain
 import { ethers } from 'ethers';
-import crypto from 'crypto';
+import { DEFAULT_RPCS } from './chains.js';
 
 async function verifyProof(proof, customRpc = null) {
-  const { data, proof: proofData } = proof;
-  const { hash, chain, chainId, txid, block } = proofData;
+  const { chain, txid, block } = proof;
   
-  // 1. Verify hash matches data
-  const canonical = JSON.stringify(data, Object.keys(data).sort());
-  const computedHash = crypto.createHash('sha256').update(canonical).digest('hex');
-  
-  if (computedHash !== hash) {
-    return { valid: false, reason: 'Hash mismatch' };
+  if (!chain || !txid) {
+    return { valid: false, reason: 'Missing chain or txid in proof' };
   }
   
-  // 2. Verify transaction exists on chain
+  // Connect to chain
   const rpcUrl = customRpc || DEFAULT_RPCS[chain];
+  if (!rpcUrl) {
+    return { valid: false, reason: `Chain ${chain} not supported` };
+  }
+  
   const provider = new ethers.JsonRpcProvider(rpcUrl);
   
   try {
+    // Get transaction from chain
     const tx = await provider.getTransaction(txid);
+    
     if (!tx) {
-      return { valid: false, reason: 'Transaction not found' };
+      return { valid: false, reason: 'Transaction not found on chain' };
     }
     
-    // 3. Verify hash is in transaction data
-    const txHash = tx.data.slice(2); // remove '0x'
-    if (txHash !== hash) {
-      return { valid: false, reason: 'Hash not in transaction' };
-    }
-    
-    // 4. Verify block matches
-    if (tx.blockNumber !== block) {
+    // Verify block number matches
+    if (block && tx.blockNumber !== block) {
       return { valid: false, reason: 'Block number mismatch' };
     }
     
-    return { valid: true };
+    // Decode data from transaction
+    if (!tx.data || tx.data === '0x') {
+      return { valid: false, reason: 'No data in transaction' };
+    }
+    
+    // Decode hex back to JSON string
+    const jsonString = Buffer.from(tx.data.slice(2), 'hex').toString('utf8');
+    
+    try {
+      const data = JSON.parse(jsonString);
+      return { 
+        valid: true, 
+        data: data,
+        txid: txid,
+        block: tx.blockNumber
+      };
+    } catch (e) {
+      return { valid: false, reason: 'Data is not valid JSON' };
+    }
     
   } catch (error) {
     return { valid: false, reason: error.message };
