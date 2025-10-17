@@ -22,7 +22,7 @@ Records use JSON-LD with Schema.org vocabulary:
 {
   "@context": "https://schema.org/",
   "@type": "SchemaOrgType",
-  ...type-specific fields
+  // ...type-specific fields
 }
 ```
 
