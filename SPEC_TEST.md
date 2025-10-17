@@ -53,12 +53,6 @@ This ensures consistent representation across implementations.
 4. Send to self (or any address)
 5. Wait for confirmation
 
-### Other Chains (Future)
-
-- **BSV:** Use OP_RETURN with full data
-- **Bitcoin:** OP_RETURN (limited to 80 bytes)
-- **Solana:** Custom program or memo field
-
 ## Proof Format
 
 After anchoring, generate proof file:
@@ -88,8 +82,6 @@ After anchoring, generate proof file:
 
 ## Identity
 
-**Wallet address = identity**
-
 No separate identity layer (DIDs, etc.) needed. Your wallet address is your identifier.
 
 Track record built from:
@@ -114,18 +106,6 @@ For transactions requiring mutual verification (e.g., property sales):
 2. Each from their own wallet
 3. Creates mutual proof of agreement
 4. Both records verifiable independently
-
-## Cost Considerations
-
-**EVM chains:**
-- Expensive (gas scales with data size)
-- Demonstrates the problem
-- Use for small records or when network effects matter
-
-**BSV and similar:**
-- Cheap (sub-cent for large data)
-- Practical for real-world use
-- Preferred for production
 
 ## Extensibility
 
@@ -153,7 +133,7 @@ To add chain support:
 ## Security Considerations
 
 - **Private keys:** Required for anchoring. Secure storage essential.
-- **Data privacy:** All data is PUBLIC and permanent. Don't anchor sensitive info.
+- **Data privacy:** All data is public and permanent. 
 - **Immutability:** Cannot delete or modify after anchoring.
 - **Chain security:** Inherits security model of chosen blockchain.
 
@@ -163,7 +143,7 @@ To add chain support:
 - **No updates** - create new record instead
 - **Chain costs** - varies dramatically by chain
 - **Data limits** - some chains have size restrictions
-- **No built-in privacy** - everything is public
+- **No built-in privacy mechanisms**
 
 ## Future Considerations
 
@@ -174,8 +154,6 @@ To add chain support:
 - Discovery protocols
 
 ## Reference Implementation
-
-See: https://github.com/[your-repo]/permanent-record-protocol
 
 JavaScript/Node.js implementation with:
 - EVM chain support

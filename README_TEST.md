@@ -62,8 +62,6 @@ Current EVM chains:
 - BSC
 - Avalanche
 
-**Note:** EVM support is primarily for demonstration. Gas costs make it expensive for large data. Future adapters for BSV and other chains will enable cheap, scalable permanent storage.
-
 ## How It Works
 
 1. **Data is canonicalized** (JSON with sorted keys)
@@ -99,17 +97,6 @@ Users can follow these examples or create custom structures using Schema.org voc
 - **No platform** - just a protocol, no servers to maintain
 - **Permissionless** - anyone can implement, extend, or build on top
 
-## Roadmap
-
-- [ ] BSV adapter (cheap, scalable permanent storage)
-- [ ] Bitcoin adapter (most secure, limited data)
-- [ ] Solana adapter
-- [ ] Additional schema templates
-- [ ] Example indexer implementation
-- [ ] Discovery tools
-
-## Why Not Just Hashes?
-
 Storing only hashes on-chain is cheaper but requires:
 - Off-chain data storage (centralized or distributed)
 - Users to maintain original data
@@ -120,11 +107,3 @@ Full data on-chain means:
 - No off-chain dependencies
 - True permanence
 - Enables discovery and indexing
-
-## Contributing
-
-This is a protocol, not a product. Fork it, extend it, build on it.
-
-## License
-
-MIT
