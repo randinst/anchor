@@ -43,6 +43,31 @@ This ensures consistent representation across implementations.
 - **Creative Works:** CreativeWork, MediaObject
 - **Legal:** (use appropriate Schema.org types or extend)
 
+## Protocol Identifier
+
+All PRP transactions include a 4-byte protocol identifier prefix:
+
+**Format:** `PRP1` (ASCII)
+**Hex:** `0x50525031`
+
+This appears at the start of the transaction data field:
+```
+0x50525031 + [JSON data as hex]
+```
+
+**Purpose:**
+- Distinguish PRP messages from other on-chain data
+- Enable indexers to find protocol messages
+- Support protocol versioning (PRP1, PRP2, etc.)
+
+**Example:**
+```
+Full transaction data field:
+0x50525031{"@context":"https://schema.org/","@type":"BuyAction",...}
+   ^^^^^^^^ 
+   Protocol ID (PRP1)
+```
+
 ## Anchoring Process
 
 ### EVM Chains
@@ -70,15 +95,6 @@ After anchoring, generate proof file:
 ```
 
 **Note:** Original data is NOT in proof file - it's on-chain.
-
-## Verification Process
-
-1. Read proof file
-2. Connect to specified chain
-3. Fetch transaction by txid
-4. Decode data field from hex to UTF-8
-5. Parse as JSON
-6. Validate structure and content
 
 ## Identity
 
