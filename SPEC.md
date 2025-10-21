@@ -1,100 +1,178 @@
-# Blockchain Anchoring Standard
+# Permanent Record Protocol - Specification v0.1
 
 ## Purpose
-Permanent, verifiable records of transactions, statements, credentials, and creative works.
 
-## Core Principles
-1. Use standard JSON schemas for common record types
-2. Anchor to any blockchain that supports arbitrary data
-3. Both parties in physical transactions should anchor independently
+Enable permanent, verifiable, readable records of transactions, credentials, statements, and creative works on any blockchain.
 
-## Data Structure
+## Design Principles
 
-Choose a schema from `/schemas` or create your own following this pattern:
+1. **Full data on-chain** - actual JSON data, not just hashes
+2. **Chain-agnostic** - works on any blockchain supporting arbitrary data
+3. **Standards-based** - uses Schema.org vocabulary
+4. **Permissionless** - no gatekeepers or central authority
+5. **Permanent** - once anchored, readable forever
+
+## Data Format
+
+### Structure
+
+Records use JSON-LD with Schema.org vocabulary:
+
 ```json
 {
-  "type": "deed|credential|statement|artwork|receipt|testimony",
-  "timestamp": "ISO8601 datetime",
-  ... type-specific fields
+  "@context": "https://schema.org/",
+  "@type": "SchemaOrgType",
+  // ...type-specific fields
 }
+```
+
+### Canonicalization
+
+Before anchoring, JSON is canonicalized:
+1. Keys sorted alphabetically
+2. No whitespace
+3. UTF-8 encoding
+
+This ensures consistent representation across implementations.
+
+### Common Record Types
+
+- **Transactions:** BuyAction, SellAction, Invoice
+- **Credentials:** EducationalOccupationalCredential
+- **Statements:** Article, Message, CreativeWork
+- **Creative Works:** CreativeWork, MediaObject
+- **Legal:** (use appropriate Schema.org types or extend)
+
+## Protocol Identifier
+
+All PRP transactions include a 4-byte protocol identifier prefix:
+
+**Format:** `PRP1` (ASCII)
+**Hex:** `0x50525031`
+
+This appears at the start of the transaction data field:
+```
+0x50525031 + [JSON data as hex]
+```
+
+**Purpose:**
+- Distinguish PRP messages from other on-chain data
+- Enable indexers to find protocol messages
+- Support protocol versioning (PRP1, PRP2, etc.)
+
+**Example:**
+```
+Full transaction data field:
+0x50525031{"@context":"https://schema.org/","@type":"BuyAction",...}
+   ^^^^^^^^ 
+   Protocol ID (PRP1)
 ```
 
 ## Anchoring Process
 
-1. **Create your record** using a schema template
-2. **Hash it**: `sha256(canonical_json)` - use sorted keys, no whitespace
-3. **Anchor the hash** to your chosen blockchain:
-   - Bitcoin: OP_RETURN transaction
-   - Ethereum: Contract call or transaction data
-   - XRP: Memo field
-   - BSV: OP_RETURN
-4. **Create proof file**:
+### EVM Chains
+
+1. Canonicalize JSON data
+2. Convert to hex: `'0x' + Buffer.from(json).toString('hex')`
+3. Create transaction with data in `data` field
+4. Send to self (or any address)
+5. Wait for confirmation
+
+## Proof Format
+
+After anchoring, generate proof file:
+
 ```json
 {
-  "data": { /* original record */ },
   "proof": {
-    "hash": "sha256 hash",
-    "chain": "bitcoin|ethereum|xrp|bsv",
-    "txid": "transaction id",
-    "block": 123456,
-    "timestamp": "ISO8601"
+    "chain": "polygon",
+    "chainId": 137,
+    "txid": "0xabc...",
+    "block": 12345678,
+    "timestamp": "2025-10-17T10:30:00Z"
   }
 }
 ```
 
-## Verification
+**Note:** Original data is NOT in proof file - it's on-chain.
 
-Anyone can verify by:
-1. Hash the `data` field → should match `proof.hash`
-2. Look up `txid` on the chain → should exist at claimed block
-3. Check timestamp matches block time
+## Identity
 
-## For Physical Transactions
+No separate identity layer (DIDs, etc.) needed. Your wallet address is your identifier.
 
-Both parties should:
-- Anchor identical data structure
-- Exchange proof files
-- Creates mutual verification
+Track record built from:
+- All records anchored from that address
+- Can be queried by scanning address's transactions
+- Third parties can build reputation systems
 
-## Chain-Specific Notes
+## Discovery
 
-**Bitcoin**: Use OP_RETURN with hex-encoded hash (80 byte limit)
-**Ethereum**: Store hash in transaction input data or contract
-**XRP**: Use memo field (max 1KB)
-**BSV**: OP_RETURN supports larger data
+Protocol does not specify discovery mechanism. Possible approaches:
 
-## Tools
+1. **Direct sharing** - parties exchange proof files
+2. **Address scanning** - scan all transactions from an address
+3. **Indexers** - third parties index all protocol messages
+4. **Block explorers** - use existing tools to read data
 
-See `/tools` for optional helpers. Or use:
-- `bitcoin-cli` + your own scripts
-- Chain libraries in your language
-- Any tool that can create transactions with arbitrary data
+## Multi-Party Records
 
-# MORE
+For transactions requiring mutual verification (e.g., property sales):
 
-MESSAGE TYPES:
-- deed
-- credential  
-- statement
-- artwork
-- receipt
-- testimony
+1. Both parties anchor identical or complementary data
+2. Each from their own wallet
+3. Creates mutual proof of agreement
+4. Both records verifiable independently
 
-MESSAGE FORMAT:
-{
-  "version": "1.0",
-  "type": "deed",
-  "timestamp": "ISO8601",
-  "author": "did:key:abc123...",
-  "data": { /* type-specific fields */ },
-  "proof": {
-    "chain": "bitcoin|bsv|ethereum|xrp",
-    "txid": "...",
-    "block": 12345
-  }
-}
+## Extensibility
 
-VERIFICATION:
-- Hash data field
-- Check hash in txid on specified chain
-- Validate signature against author DID
+### Custom Types
+
+Users can:
+- Use any Schema.org type
+- Extend with custom properties
+- Create domain-specific vocabularies
+
+### New Chains
+
+To add chain support:
+1. Implement anchoring function for that chain
+2. Implement verification function
+3. Follow same proof format
+4. Document chain-specific details
+
+### Protocol Versioning
+
+- Current version: 0.1
+- Version indicated in proof file (future)
+- Backward compatibility maintained
+
+## Security Considerations
+
+- **Private keys:** Required for anchoring. Secure storage essential.
+- **Data privacy:** All data is public and permanent. 
+- **Immutability:** Cannot delete or modify after anchoring.
+- **Chain security:** Inherits security model of chosen blockchain.
+
+## Limitations
+
+- **No deletion** - permanent means permanent
+- **No updates** - create new record instead
+- **Chain costs** - varies dramatically by chain
+- **Data limits** - some chains have size restrictions
+- **No built-in privacy mechanisms**
+
+## Future Considerations
+
+- Protocol identifier prefix (e.g., "PRP1" in data field)
+- Encrypted data support
+- Inter-record references
+- Standardized indexer API
+- Discovery protocols
+
+## Reference Implementation
+
+JavaScript/Node.js implementation with:
+- EVM chain support
+- CLI tool
+- Library for integration
+- Example schemas
