@@ -485,3 +485,18 @@ Anyone can verify by checking the txid on block explorer.
 - Check key format matches chain type
 - Try testnet first if unsure
 - View transaction on block explorer to see raw data
+
+### Simplest Test
+
+*Install dependencies
+```npm install```
+
+*Get a testnet wallet
+```Polygon Mumbai faucet or create with ethers```
+
+*Create test data
+```echo '{"@context":"https://schema.org/","@type":"Article","headline":"Test"}' > test.json```
+
+*Try it
+```node cli/prp.js anchor test.json --chain mumbai --key 0xYOUR_TEST_KEY```
+
