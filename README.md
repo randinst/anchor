@@ -4,7 +4,7 @@ A protocol for embedding immutable, readable data records to blockchains.
 
 ## What This Is
 
-LARP allows for anchoring of structured data (transactions, credentials, statements, creative works) on-chain that can read be read by anyone.
+LARP allows for anchoring of structured data (transactions, credentials, statements, creative works) on-chain that can be read by anyone.
 
 **Key principles:**
 - Chain-agnostic format
