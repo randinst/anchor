@@ -32,7 +32,7 @@ cat > my-deed.json << EOF
   "buyer": { "@type": "Person", "name": "Bob" },
   "object": { 
     "@type": "Product",
-    "name": "Property at 31 Spooner Street"
+    "name": "Property at 31 Spooner St"
   },
   "price": 500000,
   "priceCurrency": "USD"
@@ -135,7 +135,7 @@ cat > deed.json << EOF
   "buyer": { "@type": "Person", "name": "Bob" },
   "object": { 
     "@type": "Product",
-    "name": "Property at 31 Spooner Street"
+    "name": "Property at 31 Spooner St"
   },
   "price": 500000,
   "priceCurrency": "USD"
