@@ -52,7 +52,7 @@ async function anchorToXRP(data, chainName, secretKey, customRpc = null) {
         {
           Memo: {
             MemoData: memoData,
-            MemoType: Buffer.from('PRP', 'utf8').toString('hex').toUpperCase(),
+            MemoType: Buffer.from('LARP', 'utf8').toString('hex').toUpperCase(),
             MemoFormat: Buffer.from('json', 'utf8').toString('hex').toUpperCase()
           }
         }
@@ -77,7 +77,7 @@ async function anchorToXRP(data, chainName, secretKey, customRpc = null) {
     // 10. Return proof
     return {
       proof: {
-        protocol: 'PRP',
+        protocol: 'LARP',
         version: '1',
         chain: chainName,
         txid: signed.hash,

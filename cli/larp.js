@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// cli/prp.js - Command line interface for Permanent Record Protocol
+// cli/larp.js - Command line interface for Permanent Record Protocol
 
 import { Command } from 'commander';
 import fs from 'fs';
@@ -30,7 +30,7 @@ import {
 const program = new Command();
 
 program
-  .name('prp')
+  .name('larp')
   .description('Permanent Record Protocol - Anchor data to blockchains')
   .version('0.1.0');
 
@@ -195,7 +195,7 @@ program
       console.log(`  - ${chain}`);
     });
     
-    console.log('\nBitcoin Forks:');
+    console.log('\nBitcoin Networks:');
     Object.entries(BITCOIN_NETWORKS).forEach(([key, config]) => {
       console.log(`  - ${key} (${config.name}, max ${config.maxDataSize} bytes)`);
     });

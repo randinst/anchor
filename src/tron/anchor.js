@@ -89,7 +89,7 @@ async function anchorToTron(data, chainName, privateKeyHex, customNodes = null) 
     // 11. Return proof
     return {
       proof: {
-        protocol: 'PRP',
+        protocol: 'LARP',
         version: '1',
         chain: chainName,
         txid: txid,

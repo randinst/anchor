@@ -1,4 +1,4 @@
-// verify.js - Verify XRP proofs
+﻿// verify.js - Verify XRP proofs
 import { Client } from 'xrpl';
 import { XRP_CONFIG, PROTOCOL_ID } from './config.js';
 
@@ -54,7 +54,7 @@ async function verifyXRPProof(proof, customRpc = null) {
     
     // Check protocol identifier
     if (!fullData.startsWith(PROTOCOL_ID)) {
-      return { valid: false, reason: 'Not a PRP transaction (missing protocol identifier)' };
+      return { valid: false, reason: 'Not a LARP transaction (missing protocol identifier)' };
     }
     
     // Extract and parse JSON
@@ -67,7 +67,7 @@ async function verifyXRPProof(proof, customRpc = null) {
         data: data,
         txid: txid,
         ledger: tx.ledger_index,
-        protocol: 'PRP v1',
+        protocol: 'LARP v1',
         explorer: config.explorer + txid
       };
     } catch (e) {

@@ -1,4 +1,4 @@
-// config.js - Solana configuration
+﻿// config.js - Solana configuration
 
 export const SOLANA_CONFIG = {
   solana: {
@@ -24,5 +24,5 @@ export const SOLANA_CONFIG = {
   }
 };
 
-// Protocol identifier: "PRP1" (same as others)
-export const PROTOCOL_ID = 'PRP1';
+// Protocol identifier: "LARP1" (same as others)
+export const PROTOCOL_ID = 'LARP1';

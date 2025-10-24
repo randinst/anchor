@@ -1,4 +1,4 @@
-// verify.js - Verify Bitcoin proofs
+﻿// verify.js - Verify Bitcoin proofs
 import axios from 'axios';
 import { BITCOIN_NETWORKS, PROTOCOL_ID } from './chains.js';
 
@@ -53,7 +53,7 @@ async function verifyBitcoinProof(proof, customRpc = null) {
     // Check protocol ID
     const protocolIdFromTx = dataBuffer.slice(0, PROTOCOL_ID.length);
     if (!protocolIdFromTx.equals(PROTOCOL_ID)) {
-      return { valid: false, reason: 'Not a PRP transaction (missing protocol identifier)' };
+      return { valid: false, reason: 'Not a LARP transaction (missing protocol identifier)' };
     }
     
     // Extract and parse JSON
@@ -66,7 +66,7 @@ async function verifyBitcoinProof(proof, customRpc = null) {
         valid: true,
         data: data,
         txid: txid,
-        protocol: 'PRP v1',
+        protocol: 'LARP v1',
         explorer: config.explorer + txid
       };
     } catch (e) {

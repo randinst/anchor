@@ -1,4 +1,4 @@
-// verify.js - Verify Tron proofs
+﻿// verify.js - Verify Tron proofs
 import TronWeb from 'tronweb';
 import { TRON_CONFIG, PROTOCOL_ID } from './config.js';
 
@@ -54,7 +54,7 @@ async function verifyTronProof(proof, customNodes = null) {
     
     // Check protocol identifier
     if (!fullData.startsWith(PROTOCOL_ID)) {
-      return { valid: false, reason: 'Not a PRP transaction (missing protocol identifier)' };
+      return { valid: false, reason: 'Not a LARP transaction (missing protocol identifier)' };
     }
     
     // Extract and parse JSON
@@ -67,7 +67,7 @@ async function verifyTronProof(proof, customNodes = null) {
         data: data,
         txid: txid,
         blockNumber: tx.blockNumber,
-        protocol: 'PRP v1',
+        protocol: 'LARP v1',
         explorer: config.explorer + txid
       };
     } catch (e) {

@@ -1,16 +1,16 @@
-# Permanent Record Protocol (PRP)
+# Ledger Anchored Record Protocol
 
-A protocol for anchoring permanent, readable records to blockchains.
+A protocol for embedding immutable, readable data records to blockchains.
 
 ## What This Is
 
-PRP allows you to anchor structured data (transactions, credentials, statements, creative works) to any blockchain where full data can be stored on-chain and read by anyone.
+LARP allows for anchoring of structured data (transactions, credentials, statements, creative works) on-chain that can read be read by anyone.
 
 **Key principles:**
-- Full data on-chain (not just hashes)
-- Chain-agnostic format (currently EVM, expandable to BSV, Bitcoin, etc.)
-- Uses Schema.org vocabulary for interoperability
-- No central infrastructure - pure protocol
+- Chain-agnostic format
+- Full data on-chain, not just hashes 
+- Use of Schema.org vocabulary for interoperability
+- No central infrastructure
 
 ## Quick Start
 
@@ -40,35 +40,32 @@ cat > my-deed.json << EOF
 EOF
 
 # Anchor to blockchain
-prp anchor my-deed.json --chain polygon --key 0xYOUR_PRIVATE_KEY
+larp anchor my-deed.json --chain polygon --key 0xYOUR_PRIVATE_KEY
 ```
 
 ### Verify Proof
 
 ```bash
-prp verify my-deed-proof.json
+larp verify my-deed-proof.json
 ```
 
 The full JSON data is retrieved directly from the blockchain.
 
 ## Supported Chains
 
-Current EVM chains:
-- Ethereum
-- Polygon
-- Base
-- Arbitrum
-- Optimism
-- BSC
-- Avalanche
+- All EVM chains
+- Bitcoin (BTC, BSV, BCH)
+- Solana
+- Tron
+- XRPL
 
-## How It Works
+## Anchoring Process
 
-1. **Data is canonicalized** (JSON with sorted keys)
-2. **Full JSON is converted to hex** and placed in transaction data field
-3. **Transaction is broadcast** to chosen blockchain
-4. **Proof file contains** chain name, txid, and block number
-5. **Anyone can verify** by fetching the transaction and decoding the data
+1. Data is canonicalized (JSON with sorted keys)
+2. Full JSON is converted to hex and placed in transaction data field
+3. Transaction is broadcast to chosen blockchain
+4. Proof file contains chain name, txid, and block number
+5. Anyone can verify by fetching the transaction and decoding the data
 
 ## Schemas
 
@@ -105,22 +102,22 @@ Storing only hashes on-chain is cheaper but requires:
 Full data on-chain means:
 - Anyone can read it forever
 - No off-chain dependencies
-- True permanence
-- Enables discovery and indexing
+- Chain-specific permanence
+- Viable discovery and indexing
 
 ---
 
 ## Installation
 ```bash
 npm install
-npm link  # Makes 'prp' command available globally
+npm link  # Makes 'larp' command available globally
 ```
 
 ## Quick Examples
 
 ### 1. List Supported Chains
 ```bash
-prp list
+larp list
 ```
 
 Shows all available chains and their key formats.
@@ -146,7 +143,7 @@ cat > deed.json << EOF
 EOF
 
 # Anchor it
-prp anchor deed.json --chain polygon --key 0xYOUR_PRIVATE_KEY
+larp anchor deed.json --chain polygon --key 0xYOUR_PRIVATE_KEY
 
 # Output:
 # ✓ Successfully anchored to polygon
@@ -159,7 +156,7 @@ prp anchor deed.json --chain polygon --key 0xYOUR_PRIVATE_KEY
 ### 3. Anchor to Bitcoin
 ```bash
 # Same JSON file
-prp anchor deed.json --chain btc --key 0xYOUR_PRIVATE_KEY
+larp anchor deed.json --chain btc --key 0xYOUR_PRIVATE_KEY
 
 # Note: BTC limited to 76 bytes (after protocol ID)
 # Will error if data too large
@@ -170,7 +167,7 @@ prp anchor deed.json --chain btc --key 0xYOUR_PRIVATE_KEY
 ### 4. Anchor to BSV (Unlimited Data)
 ```bash
 # Large document - no problem on BSV
-prp anchor large-document.json --chain bsv --key 0xYOUR_PRIVATE_KEY
+larp anchor large-document.json --chain bsv --key 0xYOUR_PRIVATE_KEY
 ```
 
 ---
@@ -178,7 +175,7 @@ prp anchor large-document.json --chain bsv --key 0xYOUR_PRIVATE_KEY
 ### 5. Anchor to XRP
 ```bash
 # XRP uses different key format
-prp anchor statement.json --chain xrp --key sXXXXXXXXXXXXXXXXXX
+larp anchor statement.json --chain xrp --key sXXXXXXXXXXXXXXXXXX
 
 # Max 1KB data
 ```
@@ -188,7 +185,7 @@ prp anchor statement.json --chain xrp --key sXXXXXXXXXXXXXXXXXX
 ### 6. Anchor to Solana
 ```bash
 # Solana uses Base58 key
-prp anchor credential.json --chain solana --key 5Jv8...base58key...
+larp anchor credential.json --chain solana --key 5Jv8...base58key...
 
 # Max 566 bytes
 ```
@@ -198,7 +195,7 @@ prp anchor credential.json --chain solana --key 5Jv8...base58key...
 ### 7. Anchor to Tron
 ```bash
 # Tron uses hex key
-prp anchor receipt.json --chain tron --key 0xYOUR_PRIVATE_KEY
+larp anchor receipt.json --chain tron --key 0xYOUR_PRIVATE_KEY
 
 # Fast and cheap
 ```
@@ -207,11 +204,11 @@ prp anchor receipt.json --chain tron --key 0xYOUR_PRIVATE_KEY
 
 ### 8. Verify Any Proof
 ```bash
-prp verify deed-proof.json
+larp verify deed-proof.json
 
 # Output:
 # ✓ Proof is valid!
-# Protocol: PRP v1
+# Protocol: LARP v1
 # Block: 12345678
 # Data type: BuyAction
 # 
@@ -292,31 +289,31 @@ Get from TronLink wallet
 
 **Ethereum Sepolia:**
 ```bash
-prp anchor test.json --chain sepolia --key 0x...
+larp anchor test.json --chain sepolia --key 0x...
 ```
 Get free ETH: https://sepoliafaucet.com
 
 **Polygon Mumbai:**
 ```bash
-prp anchor test.json --chain mumbai --key 0x...
+larp anchor test.json --chain mumbai --key 0x...
 ```
 Get free MATIC: https://faucet.polygon.technology
 
 **Solana Devnet:**
 ```bash
-prp anchor test.json --chain solanadev --key YOUR_KEY
+larp anchor test.json --chain solanadev --key YOUR_KEY
 ```
 Get free SOL: https://solfaucet.com
 
 **XRP Testnet:**
 ```bash
-prp anchor test.json --chain xrptest --key YOUR_SECRET
+larp anchor test.json --chain xrptest --key YOUR_SECRET
 ```
 Get free XRP: https://xrpl.org/xrp-testnet-faucet.html
 
 **Tron Shasta:**
 ```bash
-prp anchor test.json --chain trontest --key 0x...
+larp anchor test.json --chain trontest --key 0x...
 ```
 Get free TRX: https://www.trongrid.io/shasta
 
@@ -383,7 +380,7 @@ Use https://xrpl.org/xrp-testnet-faucet.html (generates wallet for you)
 ### Custom RPC Endpoint
 ```bash
 # Use your own node or paid service
-prp anchor deed.json --chain ethereum \
+larp anchor deed.json --chain ethereum \
   --key 0x... \
   --rpc https://eth-mainnet.g.alchemy.com/v2/YOUR-API-KEY
 ```
@@ -448,13 +445,13 @@ Always verify proof works before sharing with others
 
 **Seller:**
 ```bash
-prp anchor property-deed.json --chain bsv --key 0xSELLER_KEY
+larp anchor property-deed.json --chain bsv --key 0xSELLER_KEY
 # Shares deed-proof.json with buyer
 ```
 
 **Buyer:**
 ```bash
-prp anchor property-deed.json --chain bsv --key 0xBUYER_KEY
+larp anchor property-deed.json --chain bsv --key 0xBUYER_KEY
 # Shares deed-proof.json with seller
 ```
 
@@ -464,13 +461,13 @@ Both now have mutual proof of agreement.
 
 **University:**
 ```bash
-prp anchor degree.json --chain ethereum --key 0xUNI_KEY
+larp anchor degree.json --chain ethereum --key 0xUNI_KEY
 # Shares degree-proof.json with graduate
 ```
 
 **Graduate can verify:**
 ```bash
-prp verify degree-proof.json
+larp verify degree-proof.json
 # Shows valid credential
 ```
 
@@ -498,5 +495,5 @@ Anyone can verify by checking the txid on block explorer.
 ```echo '{"@context":"https://schema.org/","@type":"Article","headline":"Test"}' > test.json```
 
 *Try it
-```node cli/prp.js anchor test.json --chain mumbai --key 0xYOUR_TEST_KEY```
+```node cli/larp.js anchor test.json --chain mumbai --key 0xYOUR_TEST_KEY```
 

@@ -1,4 +1,4 @@
-# Permanent Record Protocol - Specification v0.1
+﻿# Ledger-Anchored Record Protocol - Specification v0.1
 
 ## Purpose
 
@@ -45,9 +45,9 @@ This ensures consistent representation across implementations.
 
 ## Protocol Identifier
 
-All PRP transactions include a 4-byte protocol identifier prefix:
+All LARP transactions include a 4-byte protocol identifier prefix:
 
-**Format:** `PRP1` (ASCII)
+**Format:** `LARP1` (ASCII)
 **Hex:** `0x50525031`
 
 This appears at the start of the transaction data field:
@@ -56,17 +56,33 @@ This appears at the start of the transaction data field:
 ```
 
 **Purpose:**
-- Distinguish PRP messages from other on-chain data
+- Distinguish LARP messages from other on-chain data
 - Enable indexers to find protocol messages
-- Support protocol versioning (PRP1, PRP2, etc.)
+- Support protocol versioning (LARP1, LARP2, etc.)
 
 **Example:**
 ```
 Full transaction data field:
 0x50525031{"@context":"https://schema.org/","@type":"BuyAction",...}
    ^^^^^^^^ 
-   Protocol ID (PRP1)
+   Protocol ID (LARP1)
 ```
+
+## Validation Rules
+
+Valid LARP records MUST:
+- Be valid JSON
+- Include Protocol ID prefix (LARP1)
+- Contain "@context" and "@type" fields
+- Be canonicalized before anchoring
+
+Invalid records SHOULD be ignored by verifiers.
+
+## Version Handling
+
+- Current version: LARP1 (0x50525031)
+- Implementations MUST reject unknown version prefixes
+- Future versions: LARP2, LARP3, etc.
 
 ## Anchoring Process
 
@@ -163,7 +179,7 @@ To add chain support:
 
 ## Future Considerations
 
-- Protocol identifier prefix (e.g., "PRP1" in data field)
+- Protocol identifier prefix (e.g., "LARP1" in data field)
 - Encrypted data support
 - Inter-record references
 - Standardized indexer API

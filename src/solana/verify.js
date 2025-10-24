@@ -1,4 +1,4 @@
-// verify.js - Verify Solana proofs
+﻿// verify.js - Verify Solana proofs
 import { Connection, PublicKey } from '@solana/web3.js';
 import { SOLANA_CONFIG, PROTOCOL_ID } from './config.js';
 
@@ -58,7 +58,7 @@ async function verifySolanaProof(proof, customRpc = null) {
     
     // Check protocol identifier
     if (!fullData.startsWith(PROTOCOL_ID)) {
-      return { valid: false, reason: 'Not a PRP transaction (missing protocol identifier)' };
+      return { valid: false, reason: 'Not a LARP transaction (missing protocol identifier)' };
     }
     
     // Extract and parse JSON
@@ -71,7 +71,7 @@ async function verifySolanaProof(proof, customRpc = null) {
         data: data,
         txid: txid,
         slot: tx.slot,
-        protocol: 'PRP v1',
+        protocol: 'LARP v1',
         explorer: config.explorer + txid
       };
     } catch (e) {

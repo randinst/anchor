@@ -1,4 +1,4 @@
-// anchor.js - Anchor data to Bitcoin forks
+﻿// anchor.js - Anchor data to Bitcoin forks
 import * as bitcoin from 'bitcoinjs-lib';
 import axios from 'axios';
 import { BITCOIN_NETWORKS, PROTOCOL_ID } from './chains.js';
@@ -97,7 +97,7 @@ async function anchorToBitcoin(data, chainName, privateKeyHex, customRpc = null)
   // 9. Return proof
   return {
     proof: {
-      protocol: 'PRP',
+      protocol: 'LARP',
       version: '1',
       chain: chainName,
       txid: txid,

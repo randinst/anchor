@@ -1,4 +1,4 @@
-// verify.js - Verify proofs by reading from chain
+﻿// verify.js - Verify proofs by reading from chain
 import { ethers } from 'ethers';
 import { DEFAULT_RPCS } from './chains.js';
 import { PROTOCOL_ID } from './anchor.js';
@@ -40,7 +40,7 @@ async function verifyProof(proof, customRpc = null) {
     const dataHex = tx.data.slice(2); // Remove '0x'
     
     if (!dataHex.startsWith(PROTOCOL_ID)) {
-      return { valid: false, reason: 'Not a PRP transaction (missing protocol identifier)' };
+      return { valid: false, reason: 'Not a LARP transaction (missing protocol identifier)' };
     }
     
     // Remove protocol ID and decode hex back to JSON string
@@ -54,7 +54,7 @@ async function verifyProof(proof, customRpc = null) {
         data: data,
         txid: txid,
         block: tx.blockNumber,
-        protocol: 'PRP v1'
+        protocol: 'LARP v1'
       };
     } catch (e) {
       return { valid: false, reason: 'Data is not valid JSON' };

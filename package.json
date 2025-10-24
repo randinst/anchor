@@ -1,11 +1,11 @@
-{
-  "name": "permanent-record-protocol",
+﻿{
+  "name": "ledger-anchored-record-protocol",
   "version": "0.1.0",
   "description": "Protocol for anchoring permanent, readable records to blockchains",
   "type": "module",
   "main": "src/index.js",
   "bin": {
-    "prp": "cli/prp.js"
+    "larp": "cli/larp.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

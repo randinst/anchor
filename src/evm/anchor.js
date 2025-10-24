@@ -2,8 +2,8 @@
 import { ethers } from 'ethers';
 import { DEFAULT_RPCS, CHAIN_IDS } from './chains.js';
 
-// Protocol identifier: "PRP1" (Permanent Record Protocol v1)
-const PROTOCOL_ID = '50525031'; // "PRP1" in hex
+// Protocol identifier: "LARP1" (Permanent Record Protocol v1)
+const PROTOCOL_ID = '50525031'; // "LARP1" in hex
 
 async function anchorToEVM(data, chainName, privateKey, customRpc = null) {
   const rpcUrl = customRpc || DEFAULT_RPCS[chainName];
@@ -45,7 +45,7 @@ async function anchorToEVM(data, chainName, privateKey, customRpc = null) {
   // 7. Return proof
   return {
     proof: {
-      protocol: 'PRP',
+      protocol: 'LARP',
       version: '1',
       chain: chainName,
       chainId: chainId,

@@ -1,4 +1,4 @@
-// chains.js - Bitcoin fork configurations
+﻿// chains.js - Bitcoin fork configurations
 import * as bitcoin from 'bitcoinjs-lib';
 
 export const BITCOIN_NETWORKS = {
@@ -25,5 +25,5 @@ export const BITCOIN_NETWORKS = {
   }
 };
 
-// Protocol identifier: "PRP1" (same as EVM)
-export const PROTOCOL_ID = Buffer.from('PRP1', 'utf8');
+// Protocol identifier: "LARP1" (same as EVM)
+export const PROTOCOL_ID = Buffer.from('LARP1', 'utf8');
