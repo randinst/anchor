@@ -1,4 +1,4 @@
-# Ledger Anchored Record Protocol
+# Ledger-Anchored Record Protocol
 
 A protocol for embedding immutable, readable data records to blockchains.
 
