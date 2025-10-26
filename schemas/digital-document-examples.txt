@@ -1,0 +1,25 @@
+﻿// DigitalDocument, ReadPermission, WritePermission, DigitalDocumentPermission
+
+{
+  "@type": "DigitalDocument",
+  "name": "New schema.org types proposal",
+  "author": "Alice",
+  "hasDigitalDocumentPermission": [
+    {
+      "@type": "DigitalDocumentPermission",
+      "permissionType": "https://schema.org/WritePermission",
+      "grantee": {
+        "@type": "Person",
+        "email": "alice@example.com"
+      }
+    },
+    {
+      "@type": "DigitalDocumentPermission",
+      "permissionType": "https://schema.org/ReadPermission",
+      "grantee": {
+        "@type": "Audience",
+        "audienceType": "public"
+      }
+    }
+  ]
+}

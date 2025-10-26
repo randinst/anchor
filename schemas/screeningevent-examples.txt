@@ -1,0 +1,38 @@
+﻿// ScreeningEvent, Movie, MovieTheater
+
+{
+  "@context": "https://schema.org",
+  "@type": "ScreeningEvent",
+  "name": "Jaws 3-D",
+  "description": "Jaws 3-D shown in 3D.",
+  "location": {
+    "@type": "MovieTheater",
+    "name": "ACME Cinemas 10",
+    "screenCount": 10
+  },
+  "workPresented": {
+    "@type": "Movie",
+    "name": "Jaws 3-D",
+    "sameAs": "www.imdb.com/title/tt0085750/"
+  },
+  "inLanguage": "en",
+  "videoFormat": "3D"
+}
+
+
+// Movie, countryOfOrigin
+
+{
+  "@context": "https://schema.org/",
+  "@type": "Movie",
+  "name": "Ghostbusters",
+  "productionCompany": {
+    "@type": "Organization",
+    "name": "Black Rhino"
+  },
+  "countryOfOrigin": {
+    "@type": "Country",
+    "name": "USA"
+  }
+}
+

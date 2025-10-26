@@ -1,0 +1,94 @@
+﻿// Organization, BroadcastService
+
+{
+  "@context":"https://schema.org",
+  "@type":"BroadcastService",
+  "name":"WAAY-TV",
+  "broadcastDisplayName":"ABC",
+  "videoFormat":"SD",
+  "broadcastTimezone": "-8:00",
+  "broadcastAffiliateOf":{
+    "@type":"Organization",
+    "name":"ABC"
+  }
+}
+
+
+// Organization, BroadcastService, TelevisionChannel, CableOrSatelliteService
+
+{
+  "@context":"https://schema.org",
+  "@type":"TelevisionChannel",
+  "name": "WAAY 7",
+  "broadcastChannelId":"7",
+  "broadcastServiceTier":"Premium",
+  "inBroadcastLineup":{
+    "@type":"CableOrSatelliteService",
+    "name": "Comcast"
+  },
+  "providesBroadcastService":{
+    "@type":"BroadcastService",
+    "name": "WAAY-TV",
+    "broadcastDisplayName": "ABC",
+    "broadcastAffiliateOf":{
+      "@type":"Organization",
+      "name":"ABC"
+    }
+  }
+}
+
+
+// BroadcastEvent, BroadcastService, TVEpisode
+
+{
+  "@context":"https://schema.org",
+  "@type":"BroadcastEvent",
+  "startDate":"2014-10-12T21:00",
+  "endDate":"2014-10-12T21:30",
+  "publishedOn":{
+    "@type":"BroadcastService",
+    "name": "WAAY-TV"
+  },
+  "workPerformed":{
+    "@type":"CreativeWork",
+    "name": "Modern Family: Three Turkeys"
+  },
+  "inLanguage":"en",
+  "subtitleLanguage":"es",
+  "videoFormat":"HD",
+  "isLiveBroadcast":false,
+  "name":"Modern Family - S6E8 - Three Turkeys",
+  "description":"Phil and Luke take over Thanksgiving duties."
+}
+
+
+// BroadcastEvent, SportsEvent, broadcastOfEvent, isLiveBroadcast, videoFormat, competitor
+
+{
+  "@context":"https://schema.org",
+  "@type":"BroadcastEvent",
+  "name": "FIFA Women's World Cup Final",
+  "description": "US vs. Japan",
+  "isLiveBroadcast": true,
+  "videoFormat": "HD",
+  "startDate": "2015-07-05T15:30-07:00",
+  "broadcastOfEvent": {
+    "@type": "SportsEvent",
+    "name": "FIFA Women's World Cup Final 2015",
+    "competitor": [
+      {
+        "@type": "SportsTeam",
+        "name": "United States"
+      },
+      {
+        "@type": "SportsTeam",
+        "name": "Japan"
+      }
+    ],
+    "startDate": "2015-07-05T16:00-07:00",
+    "location": {
+      "@type": "City",
+      "name": "Vancouver"
+    }
+  }
+}

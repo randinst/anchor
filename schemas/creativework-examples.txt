@@ -1,0 +1,129 @@
+// Painting, contentLocation, locationCreated
+
+{
+  "@context": "https://schema.org/",
+  "@type": "Painting",
+  "name": "The Church at Auvers",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Vincent_van_Gogh_-_The_Church_in_Auvers-sur-Oise%2C_View_from_the_Chevet_-_Google_Art_Project.jpg",
+  "sameAs": "https://en.wikipedia.org/wiki/The_Church_at_Auvers",
+  "creator": {
+    "@type": "Person",
+    "name": "Vincent van Gogh"
+  },
+  "contentLocation": {
+    "@type": "AdministrativeArea",
+    "name": "Auvers-sur-Oise"
+  },
+  "locationCreated": {
+    "@type": "AdministrativeArea",
+    "name": "Saint-Rémy-de-Provence"
+  }
+}
+
+
+// Conversation, Message
+
+{
+  "@context": "https://schema.org/",
+  "@type": "Conversation",
+  "name": "Duck Season vs Rabbit Season",
+  "sameAs": "https://www.youtube.com/watch?v=9-k5J4RxQdE",
+  "hasPart": [
+    {
+      "@type": "Message",
+      "sender": {
+        "@type": "Person",
+        "name": "Bugs Bunny"
+      },
+      "recipient": {
+        "@type": "Person",
+        "name": "Daffy Duck"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "Duck Season"
+      },
+      "datePublished": "2016-02-29"
+    },
+    {
+      "@type": "Message",
+      "sender": {
+        "@type": "Person",
+        "name": "Daffy Duck"
+      },
+      "recipient": {
+        "@type": "Person",
+        "name": "Bugs Bunny"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "Rabbit Season"
+      },
+      "datePublished": "2016-03-01"
+    }
+  ]
+}
+
+
+// Message
+
+{
+  "@context": "https://schema.org/",
+  "@type": "Message",
+  "sender": {
+    "@type": "Person",
+    "name": "Dom Portwood"
+  },
+  "recipient": {
+    "@type": "Person",
+    "name": "Peter Gibbons"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "TPS reports"
+  },
+  "datePublished": "2016-02-29",
+  "dateRead": "2016-03-03",
+  "messageAttachment": {
+    "@type": "CreativeWork",
+    "name": "New coversheet"
+  }
+}
+
+
+// EmailMessage, toRecipient, bccRecipient, ccRecipient
+
+{
+  "@context": "https://schema.org/",
+  "@type": "EmailMessage",
+  "sender": {
+    "@type": "Person",
+    "name": "Dom Portwood",
+    "email": "dportwood@example.com"
+  },
+  "toRecipient": {
+    "@type": "Person",
+    "name": "Peter Gibbons",
+    "email": "pgibbons@example.com"
+  },
+  "ccRecipient": {
+    "@type": "Person",
+    "name": "Bill Lumbergh",
+    "email": "blumbergh@example.com"
+  },
+  "ccRecipient": {
+    "@type": "ContactPoint",
+    "email": "tps-consulting@example.com"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "TPS reports"
+  },
+  "datePublished": "2016-02-29",
+  "dateRead": "2016-03-03",
+  "messageAttachment": {
+    "@type": "CreativeWork",
+    "name": "New coversheet"
+  }
+}
+

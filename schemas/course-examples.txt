@@ -1,0 +1,138 @@
+﻿// Course, CourseInstance, hasCourseInstance, courseMode
+
+{
+  "@context": "https://schema.org/",
+  "@type": "Course",
+  "description": "In this course you will get an introduction to the main tools and ideas in the data scientist's toolbox...",
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": ["MOOC","online"],
+    "endDate": "2019-03-21",
+    "startDate": "2019-02-15"
+  }
+}
+
+
+// Course, CourseInstance, hasCourseInstance, courseMode
+
+{
+  "@context": "https://schema.org/",
+  "@id": "./",
+  "@type": "Course",
+  "name": "HNC Accounting",
+  "description": "This course is designed for those wishing to take up \r\n       a career in Accounting and Financial Administration within a range of \r\n       organisations....",
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": "part-time",
+      "endDate": "2017-06-21",
+      "location": "St Brycedale Campus Kirkcaldy",
+      "startDate": "2016-08-31"
+    },
+    {
+      "@type": "CourseInstance",
+      "courseMode": "full-time",
+      "endDate": "2017-06-23",
+      "location": "Halbeath Campus Dunfermline",
+      "startDate": "2016-08-29"
+    },
+    {
+      "courseMode": "full-time",
+      "endDate": "2017-06-23",
+      "location": "St Brycedale Campus Kirkcaldy",
+      "startDate": "2016-08-29"
+    }
+  ]
+}
+
+
+// Course, CourseInstance, hasCourseInstance, courseMode
+
+{
+  "@context": "https://schema.org/",
+  "@type": "Course",
+  "name": "Basic Proofreading",
+  "description": "The distance learning training course that takes you \r\n        from complete beginner to PQB qualified proofreader in one step.",
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": [
+        "distance learning",
+        "Online"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "395",
+        "priceCurrency": "GBP"
+      }
+    },
+    {
+      "@type": "CourseInstance",
+      "courseMode": [
+        "Posted",
+        "distance learning"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "440",
+        "priceCurrency": "GBP"
+      }
+    }
+  ]
+}
+
+
+// educationalCredentialAwarded
+
+{
+  "@context": "https://schema.org/",
+  "@type": "Course",
+  "educationalCredentialAwarded": "completion certificate from \r\n      PQB",
+  "name": "Basic Proofreading"
+}
+
+
+// instructor, provider
+
+{
+  "@context": "https://schema.org/",
+  "@type": "Course",
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": [
+      "MOOC",
+      "online"
+    ],
+    "instructor": {
+      "@type": "Person",
+      "jobTitle": "Associate Professor, Biostatistics",
+      "name": "Jeff Leek, PhD",
+      "url": {"@id": "http://example.org/instructor/~315"},
+      "worksFor": "Bloomberg School of Public Health "
+    },
+    "offers": {
+      "@type": "Offer",
+      "offeredBy": "Coursera",
+      "price": "0"
+    }
+  },
+  "name": "The Data Scientist's Toolbox",
+  "provider": {
+    "@type": "EducationalOrganization",
+    "name": "Johns Hopkins University"
+  }
+}
+
+// Course, courseCode, provider
+
+{
+  "@context": "https://schema.org/",
+  "@type": "Course",
+  "courseCode": "F300",
+  "name": "Physics",
+  "provider": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Bristol",
+    "url": {"@id": "/provider/324/university-of-bristol"}
+  }
+}

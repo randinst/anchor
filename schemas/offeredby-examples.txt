@@ -1,0 +1,214 @@
+﻿// Offer, offeredBy, Book, additionalType
+
+{
+  "@context":  "https://schema.org/",
+  "@id": "#record",
+  "@type": "Book",
+  "additionalType": "Product",
+  "name": "Le concerto",
+  "author": "Ferchault, Guy",
+  "offers":{
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "serialNumber": "CONC91000937",
+      "sku": "780 R2",
+      "offeredBy": {
+          "@type": "Library",
+          "@id": "http://library.anytown.gov.uk",
+          "name": "Anytown City Library"
+      },
+      "businessFunction": "http://purl.org/goodrelations/v1#LeaseOut",
+      "itemOffered": "#record"
+    }
+}
+
+
+// Offer, makesOffer
+
+{
+  "@context":"https://schema.org",
+  "@id":"http://example.com/explosive-tennis-balls",
+  "@type":"ItemPage",
+  "copyrightYear":"2015",
+  "copyrightHolder":{"@id":"#Organization"},
+  "publisher":{"@id":"#Organization"},
+  "mainEntity":{
+    "@id":"#Product",
+    "@type":"Product",
+    "name":"Explosive tennis balls",
+    "description":"Tickle your friends! Surprise your opponent!",
+    "image":"http://example.com/explosive-tennis-balls.jpg",
+    "url":"http://example.com/explosive-tennis-balls",
+    "offers":{
+      "@id":"#Offer",
+      "@type":"Offer",
+      "priceCurrency":"USD",
+      "price":"1000.00",
+      "availability":"https://schema.org/InStock",
+      "itemOffered":{"@id":"#Product"},
+        "offeredBy":{
+          "@id":"#Organization",
+          "@type":"Organization",
+          "name":"Acme Inc",
+          "logo":"http://example.commple.com/acme-inc-logo.jpg",
+          "url":"http://example.com/",
+          "sameAs":["https://twitter.com/AcmeInc","https://www.facebook.com/AcmeInc","https://plus.google.com/u/0/+AcmeInc/"]
+        }
+    }
+  }
+}
+
+
+// offeredBy, Book
+
+{
+"@context":"https://schema.org",
+"@graph": [
+  {
+    "@id": "https://laurentian.concat.ca/eg/opac/library/MRC",
+    "@type": "Library",
+    "name": "Music Resource Centre"
+  },
+  {
+    "@id": "https://laurentian.concat.ca/eg/opac/record/2845929#schemarecord",
+    "@type": ["Movie","Product"],
+    "about": [
+        "Composers > Austria > Biography.",
+        "Haydn, Joseph, 1732-1809.",
+        "Documentary films."
+    ],
+    "datePublished": "2011-01-01",
+    "name": "In search of Haydn [videorecording] / Phil Grabsky Films.com & Seventh Art Productions in association with Sky Art HD ; filmed, written and directed by Phil Grabsky.",
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "businessFunction": "http://purl.org/goodrelations/v1#LeaseOut",
+      "availableAtOrFrom": "Circulation",
+      "price": "0.00",
+      "seller": {
+        "@id": "https://laurentian.concat.ca/eg/opac/library/MRC"
+      },
+      "serialNumber":  "30007008812793",
+      "sku": "ML 410 H4 I5 2011"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "location": "[Brighton, UK] :",
+      "name": "Seventh Art Productions,"
+    }
+  }
+]
+}
+
+
+// Offer, OfferCatalog, Service, LocalBusiness, hasOfferCatalog
+
+{
+  "@context": "https://schema.org/",
+  "@type": "Service",
+  "serviceType": "Weekly home cleaning",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "ACME Home Cleaning"
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Massachusetts"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Cleaning services",
+    "itemListElement": [
+      {
+        "@type": "OfferCatalog",
+        "name": "House Cleaning",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Apartment light cleaning"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "House light cleaning up to 2 bedrooms"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "House light cleaning 3+ bedrooms"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "One-time services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Window washing"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Carpet cleaning"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Move in/out cleaning"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
+
+// Offer, FoodEstablishment, GeoCircle, DeliveryChargeSpecification, PriceSpecification
+
+  {
+    "@context": "https://schema.org/",
+    "@type": "FoodEstablishment",
+    "name": "Joe's Pizza",
+    "location": {
+      "@type": "PostalAddress",
+      "@id": "http://example.com/address",
+      "streetAddress": "123 Main Street",
+      "addressLocality": "Cambridge",
+      "addressRegion": "MA",
+      "postalCode": "02142"
+    },
+    "makesOffer": {
+      "@type": "Offer",
+      "priceSpecification": {
+        "@type": "DeliveryChargeSpecification",
+        "appliesToDeliveryMethod": "http://purl.org/goodrelations/v1#DeliveryModeOwnFleet",
+        "eligibleTransactionVolume": {
+          "@type": "PriceSpecification",
+          "price": "20.00",
+          "priceCurrency": "USD"
+        },
+        "eligibleRegion": {
+          "@type": "GeoCircle",
+          "address": {
+            "@id": "http://www.example.com/address"
+          },
+          "geoRadius": "5000"
+        }
+      }
+    }
+  }

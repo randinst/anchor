@@ -1,0 +1,384 @@
+// CreditCard, MonetaryAmount, UnitPriceSpecification
+
+{
+  "@context": "https://schema.org",
+  "@type": "CreditCard",
+  "name": "Wells Fargo Secured Visa® Credit Card",
+  "requiredCollateral": "Requires a minimum $300 security deposit.",
+  "amount": {
+      "@type": "MonetaryAmount",
+      "minValue": "300",
+      "maxValue": "10000",
+      "currency": "USD"
+  },
+  "offers": {
+      "@type": "Offer",
+      "offeredBy": {
+        "@type": "BankOrCreditUnion",
+        "name":"Wells Fargo"
+      },
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "25",
+        "priceCurrency": "USD",
+        "referenceQuantity": {
+          "@type": "QuantitativeValue",
+          "value": "1",
+          "unitCode": "ANN"
+        }
+      }
+  },
+  "annualPercentageRate": "18.99",
+  "feesAndCommissionsSpecification": "https://www.wellsfargo.com/credit-cards/secured/terms/"
+}
+
+
+// LoanOrCredit, MonetaryAmount
+
+PRE-MARKUP:
+
+{
+"@context":"https://schema.org",
+"@type":"LoanOrCredit",
+"name":"Wells Fargo GraduateSM Student Loan",
+"loanTerm":{
+    "@type":"QuantitativeValue",
+    "value":"15",
+    "unitCode": "ANN"
+},
+"annualPercentageRate":[
+  {
+    "@type":"QuantitativeValue",
+    "name": "variable interest rates",
+    "minValue":"3.22",
+    "maxValue":"8.74"
+  },
+  {
+    "@type":"QuantitativeValue",
+    "name": "fixed interest rates",
+    "minValue":"6.36",
+    "maxValue":"10.61"
+  }
+  ],
+"amount":[
+  {
+    "@type": "MonetaryAmount",
+    "name":"debt for law and business",
+    "value":"180000",
+    "currency":"USD"
+  },
+  {
+    "@type": "MonetaryAmount",
+    "name":"debt for other fields of study than law and business",
+    "value":"120000",
+    "currency":"USD"
+  }
+  ]
+}
+
+
+// BankAccount
+
+{
+    "@context": "https://schema.org/",
+    "@graph": [
+    {
+        "@type": "BankAccount",
+        "name": "Select  account",
+        "offers": {
+            "@type": "Offer",
+            "eligibleCustomerType": {
+                "@id":"http://purl.org/goodrelations/v1#Enduser"
+            },
+            "price": "0",
+            "description": "You need to be aged 18 or over, and UK resident to apply.",
+            "offeredBy": {
+                "@type": "BankOrCreditUnion",
+                "@id": "http://rbs.co.uk",
+                "name": "RBS"
+            }
+        },
+        "feesAndCommissionsSpecification": "http://personal.rbs.co.uk/content/dam/rbs_co_uk/currentaccounts/downloads/Reward/Personal%20and%20Private%20Current%20Account%20Fees%20and%20Interest%20Rates.pdf"
+    },
+    {
+        "@type": "BankAccount",
+        "name": "Select Silver account",
+        "offers": {
+            "@type": "Offer",
+            "eligibleCustomerType": "http://purl.org/goodrelations/v1#Enduser",
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "priceCurrency": "GBP",
+                "price": "10",
+                "eligibleQuantity": {
+                    "@type": "QuantitativeValue",
+                    "value":"1",
+                    "unitCode": "ANN"
+                }
+            },
+            "description": "You need to be aged 18 or over, and UK resident to apply.",
+            "offeredBy": {
+                "@type": "BankOrCreditUnion",
+                "@id": "http://rbs.co.uk",
+                "name": "RBS"
+            }
+        },
+        "feesAndCommissionsSpecification": "http://personal.rbs.co.uk/content/dam/rbs_co_uk/currentaccounts/downloads/Reward/Personal%20and%20Private%20Current%20Account%20Fees%20and%20Interest%20Rates.pdf"
+    },
+    {
+        "@type": "BankAccount",
+        "name": "Select Platinum account",
+        "offers": {
+            "@type": "Offer",
+            "eligibleCustomerType": "http://purl.org/goodrelations/v1#Enduser",
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "priceCurrency": "GBP",
+                "price": "16",
+                "eligibleQuantity": {
+                    "@type": "QuantitativeValue",
+                    "value":"1",
+                    "unitCode": "ANN"
+                }
+            },
+            "description": "You need to be aged 18 or over, and UK resident to apply.",
+            "offeredBy": {
+                "@type": "BankOrCreditUnion",
+                "@id": "http://rbs.co.uk",
+                "name": "RBS"
+            }
+        },
+        "feesAndCommissionsSpecification": "http://personal.rbs.co.uk/content/dam/rbs_co_uk/currentaccounts/downloads/Reward/Personal%20and%20Private%20Current%20Account%20Fees%20and%20Interest%20Rates.pdf"
+    },
+    {
+        "@type": "BankAccount",
+        "name": "Black account",
+        "offers": {
+            "@type": "Offer",
+            "eligibleCustomerType": "http://purl.org/goodrelations/v1#Enduser",
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "priceCurrency": "GBP",
+                "price": "24",
+                "eligibleQuantity": {
+                    "@type": "QuantitativeValue",
+                    "value":"1",
+                    "unitCode": "ANN"
+                }
+            },
+            "description": "You need to be aged 18 or over, and UK resident to apply, with either:<ul><li>£100,000 sole income paid into this account<\/li><li>a RBS mortgage of at lease £300,000<\/li><li>£100,000 in RBS savings and investments<\/li><\/ul>",
+            "offeredBy": {
+                "@type": "BankOrCreditUnion",
+                "@id": "http://rbs.co.uk",
+                "name": "RBS"
+            }
+        },
+        "feesAndCommissionsSpecification": "http://personal.rbs.co.uk/content/dam/rbs_co_uk/currentaccounts/downloads/Reward/Personal%20and%20Private%20Current%20Account%20Fees%20and%20Interest%20Rates.pdf"
+
+    }
+    ]
+}
+
+
+// DepositAccount, MonetaryAmount
+
+{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Easy access accounts Comparison - Ordered by interest rate (AER)",
+    "mainEntity": {
+        "@type": "ItemList",
+        "name": "Easy access accounts Comparison List",
+        "itemListElement": [
+        {
+            "@type": "DepositAccount",
+            "provider": {
+                "@id": "https://www.rcibank.co.uk",
+                "name": "RCI Bank"
+            },
+            "name": "Freedom Savings Account",
+            "interestRate": {
+                "@type": "QuantitativeValue",
+                "value": "1.65",
+                "valueReference": "Variable"
+            },
+            "amount": {
+                "@type": "MonetaryAmount",
+                "currency": "GBP",
+                "minValue": "100",
+                "maxValue": "1000000"
+            },
+            "availableChannel": ["Internet","Post","Telephone"]
+        },
+        {
+            "@type": "DepositAccount",
+            "provider": {
+                "@id": "https://sbiukonlinesavings.com/",
+                "name": "State Bank of India"
+            },
+            "name": "Online Instant Access Savings Issue 4",
+            "interestRate": {
+                "@type": "QuantitativeValue",
+                "value": "1.25",
+                "valueReference": "Variable"
+            },
+            "amount": {
+                "@type": "MonetaryAmount",
+                "currency": "GBP",
+                "minValue": "500",
+                "maxValue": "1000000"
+            },
+            "availableChannel": ["Internet","In Branch"]
+        },
+        {
+            "@type": "DepositAccount",
+            "provider": {
+                "@id": "http://www.aldermore.co.uk/",
+                "name": "Aldermore"
+            },
+            "name": "Easy Access Issue 9",
+            "interestRate": {
+                "@type": "QuantitativeValue",
+                "value": "1.65",
+                "valueReference": "Variable"
+            },
+            "amount": {
+                "@type": "MonetaryAmount",
+                "currency": "GBP",
+                "minValue": "1000",
+                "maxValue": "1000000"
+            },
+            "availableChannel": ["Internet","Post","Telephone"]
+        }
+        ]
+    }
+}
+
+
+// PaymentCard
+
+{
+  "@context": "https://schema.org",
+  "@type": "PaymentCard",
+  "name": "Platinum Debit Card",
+  "category": "Debit Card",
+  "offers": {
+      "@type": "Offer",
+      "offeredBy": {
+        "@type": "BankOrCreditUnion",
+        "name":"Wells Fargo"
+      },
+      "businessFunction": "http://purl.org/goodrelations/v1#ProvideService"
+  },
+  "description": "Customers with an eligible Wells Fargo Checking account can make everyday purchases using their Platinum debit card worldwide at participating retailers and service providers – including online or by phone. Pay with confidence knowing your Wells Fargo Debit Card comes with many protection features and is a safe way to pay.",
+  "feesAndCommissionsSpecification": "https://www.wellsfargo.com/debit-card/#overview"
+}
+
+
+// PaymentService
+
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Payment Fees",
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "Payment List",
+      "itemListElement": [
+      {
+        "@type": "PaymentService",
+        "name": "Sales within the US",
+        "offers": {
+          "@type": "Offer",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "eligibleQuantity":{
+                "@type": "QuantitativeValue",
+                "unitText": "per transaction"
+            },
+            "priceCurrency": "USD",
+            "price": "0.30"
+          }
+        }
+      },
+      {
+        "@type": "PaymentService",
+        "name": "Discounted rate for eligible nonprofits",
+        "offers": {
+          "@type": "Offer",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "eligibleQuantity":{
+                "@type": "QuantitativeValue",
+                "unitText": "per transaction"
+            },
+            "priceCurrency": "USD",
+            "price": "0.30"
+          }
+        }
+      },
+      {
+        "@type": "PaymentService",
+        "name": "International sales",
+        "offers": {
+          "@type": "Offer",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "eligibleQuantity":{
+                "@type": "QuantitativeValue",
+                "unitText": "per transaction"
+            },
+            "priceCurrency": "USD",
+            "price": "0.30"
+          }
+        }
+      },
+      {
+        "@type": "PaymentService",
+        "name": "Card reader",
+        "offers": {
+          "@type": "Offer",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "eligibleQuantity":{
+                "@type": "QuantitativeValue",
+                "unitText": "per transaction"
+            },
+            "priceCurrency": "USD",
+            "price": "0.30"
+          }
+        }
+      } ]
+    }
+  }
+
+
+// FinancialProduct
+
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "Term Life Insurance",
+  "description": "For most people, the primary reason to purchase life insurance is to help provide for dependents in the case of your death and the resulting loss of income. To determine a coverage amount, estimate what your family members would need after you’re gone to meet immediate, ongoing, and future financial obligations including funeral, rent or mortgage, other every day bills, college, and retirement.",
+  "offers": {
+    "@type": "Offer",
+    "offeredBy": "http://www.icinsure.com/acce/"
+  }
+}
+
+
+// InvestmentOrDeposit
+
+{
+  "@context": "https://schema.org",
+  "@type": "InvestmentOrDeposit",
+  "name": "Guaranteed Interest Fund",
+  "description": "This type of secure investment grows your money at a guaranteed rate of interest for a fixed period. It is ideal for investors looking for capital security.",
+  "amount": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "minValue": "25000",
+    "maxValue": "90000"
+  },
+  "interestRate": "1.25"
+}
