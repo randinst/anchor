@@ -77,6 +77,76 @@ The `/schemas` folder contains Schema.org examples for common record types:
 
 Users can follow these examples or create custom structures using Schema.org vocabulary.
 
+## Binary Files (Images, PDFs, Documents)
+
+The protocol is designed for structured JSON data. For binary files, you must Base64 encode them and wrap in Schema.org JSON.
+
+### Example: Anchoring an Image
+```bash
+# Create JSON with Base64-encoded image
+cat > photo-record.json << EOF
+{
+  "@context": "https://schema.org",
+  "@type": "ImageObject",
+  "name": "Property Photo",
+  "encodingFormat": "image/jpeg",
+  "contentData": "$(base64 -w 0 photo.jpg)"
+}
+EOF
+
+# Anchor normally
+prp anchor photo-record.json --chain bsv --key 0x...
+```
+
+### Example: Anchoring a PDF
+```bash
+# Base64 encode PDF
+base64 -w 0 contract.pdf > contract.b64
+
+# Create JSON
+cat > contract-record.json << EOF
+{
+  "@context": "https://schema.org",
+  "@type": "DigitalDocument",
+  "name": "Signed Contract",
+  "encodingFormat": "application/pdf",
+  "contentData": "$(cat contract.b64)"
+}
+EOF
+
+# Anchor
+prp anchor contract-record.json --chain bsv --key 0x...
+```
+
+### Size and Cost Considerations
+
+Base64 encoding increases file size by ~33%. Transaction costs:
+
+| File Size | Base64 Size | Chain | Approx Cost |
+|-----------|-------------|-------|-------------|
+| 10 KB | 13 KB | BSV | $0.01 |
+| 100 KB | 133 KB | BSV | $0.10 |
+| 1 MB | 1.3 MB | BSV | $1.00 |
+| 10 MB | 13 MB | BSV (TeraNode) | ~$0.10 |
+
+**Recommendation:** Only practical on BSV. Other chains too expensive for files > 1KB.
+
+### When to Use Binary Data
+
+- Scanned receipts/documents
+- Photos of physical items
+- Signed contracts
+- Small images/logos
+- Any supporting evidence that must be permanently accessible
+
+### Schema.org Types for Binary Data
+
+- **ImageObject** - photos, images, scans
+- **DigitalDocument** - PDFs, Word docs, text files
+- **MediaObject** - generic binary data
+- **VideoObject** - video files (very expensive)
+- **AudioObject** - audio files
+
 ## Use Cases
 
 - **Physical transactions:** Property deeds, vehicle sales, valuable items

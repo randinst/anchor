@@ -112,6 +112,58 @@ After anchoring, generate proof file:
 
 **Note:** Original data is NOT in proof file - it's on-chain.
 
+## Binary Data
+
+### Encoding
+
+Binary files (images, PDFs, etc.) can be anchored by:
+1. Base64 encoding the file
+2. Wrapping in Schema.org JSON-LD with appropriate type
+3. Anchoring the JSON normally
+
+### Structure
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "ImageObject|DigitalDocument|MediaObject",
+  "name": "descriptive name",
+  "encodingFormat": "MIME type",
+  "contentData": "base64_encoded_data"
+}
+```
+
+### Required Fields
+
+- `@context`: Must be "https://schema.org"
+- `@type`: Schema.org type appropriate for content
+- `encodingFormat`: MIME type (e.g., "image/jpeg", "application/pdf")
+- `contentData`: Base64-encoded binary data
+
+### Retrieval
+
+To retrieve binary data:
+1. Fetch transaction data from blockchain
+2. Decode hex to JSON
+3. Extract `contentData` field
+4. Base64 decode to get original binary
+5. Use `encodingFormat` to determine file type
+
+### Size Limitations
+
+Base64 encoding increases size by ~33%. Consider:
+- Transaction size limits per chain
+- Cost scaling with data size
+- BSV recommended for files > 1KB
+
+### Alternative: Future Extensions
+
+Future protocol versions may support:
+- Direct binary attachment without Base64
+- Separator-based format for efficiency
+- Multi-part transactions for large files
+
+Current version (v0.1) requires Base64 encoding in JSON.
+
 ## Identity
 
 No separate identity layer (DIDs, etc.) needed. Your wallet address is your identifier.
