@@ -243,15 +243,6 @@ Protocol does not specify discovery mechanism. Possible approaches:
 3. **Indexers** - third parties index all protocol messages
 4. **Block explorers** - use existing tools to read data
 
-## Multi-Party Records
-
-For transactions requiring mutual verification (e.g., property sales):
-
-1. Both parties anchor identical or complementary data
-2. Each from their own wallet
-3. Creates mutual proof of agreement
-4. Both records verifiable independently
-
 ## Extensibility
 
 ### Custom Types

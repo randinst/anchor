@@ -127,7 +127,6 @@ Base64 encoding increases file size by ~33%. Transaction costs:
 | 10 KB | 13 KB | BSV | $0.01 |
 | 100 KB | 133 KB | BSV | $0.10 |
 | 1 MB | 1.3 MB | BSV | $1.00 |
-| 10 MB | 13 MB | BSV (TeraNode) | ~$0.10 |
 
 **Recommendation:** Only practical on BSV. Other chains too expensive for files > 1KB.
 
