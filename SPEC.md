@@ -112,6 +112,67 @@ After anchoring, generate proof file:
 
 **Note:** Original data is NOT in proof file - it's on-chain.
 
+## Transaction Referencing
+
+Records can reference other on-chain records by including transaction identifiers.
+
+### Reference Format
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Invoice",
+  "referencesOrder": "larp:bsv:0xabc123...",
+  "description": "Invoice for order #1234"
+}
+```
+
+### URI Scheme
+
+References use the format: `larp:[chain]:[txid]`
+
+- `larp:` - Protocol identifier
+- `[chain]` - Chain name (bsv, polygon, ethereum, etc.)
+- `[txid]` - Transaction hash
+
+### Use Cases
+
+**Credential chains:**
+```json
+{
+  "@type": "EducationalOccupationalCredential",
+  "credentialSubject": "larp:ethereum:0x789...",
+  "issuer": "University"
+}
+```
+
+**Multi-party agreements:**
+Both parties anchor identical or complementary records, each referencing the other's transaction.
+
+**Document versioning:**
+```json
+{
+  "@type": "Article",
+  "name": "Updated Whitepaper v2",
+  "isBasedOn": "larp:bsv:0xdef456..."
+}
+```
+
+### Discovery
+
+To verify referenced records:
+1. Extract transaction ID from reference
+2. Query blockchain for that transaction
+3. Decode transaction data
+4. Verify LARP protocol identifier
+5. Parse and validate JSON
+
+### No Protocol Enforcement
+
+The protocol does not validate references. Verifiers should:
+- Check that referenced transactions exist
+- Confirm they contain valid LARP records
+- Interpret relationships based on Schema.org semantics
+
 ## Binary Data
 
 ### Encoding

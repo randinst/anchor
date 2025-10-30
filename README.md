@@ -156,6 +156,108 @@ Base64 encoding increases file size by ~33%. Transaction costs:
 - **Legal records:** Testimony, contracts, agreements
 - **Historical significance:** Purchases, events, anything worth preserving
 
+## Linking Records
+
+Records can reference other on-chain transactions to create chains of provenance, multi-party agreements, or document versions.
+
+### Basic Reference
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Invoice",
+  "referencesOrder": "larp:bsv:0xabc123...",
+  "totalPaymentDue": {
+    "@type": "PriceSpecification",
+    "price": 500,
+    "priceCurrency": "USD"
+  }
+}
+```
+
+Use the format: `larp:[chain]:[txid]`
+
+### Multi-Party Agreements
+
+For transactions requiring mutual verification:
+
+**Seller anchors:**
+```bash
+prp anchor property-sale.json --chain bsv --key 0xSELLER_KEY
+# Returns: txid abc123...
+```
+
+**Buyer anchors with reference:**
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "BuyAction",
+  "seller": {
+    "@type": "Person",
+    "name": "Alice",
+    "identifier": "larp:bsv:0xabc123..."
+  },
+  "object": {
+    "@type": "Product",
+    "name": "Property at 123 Main St"
+  }
+}
+```
+
+Both parties now have independent, verifiable records that reference each other.
+
+### Document Versions
+
+Link updated versions to originals:
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Protocol Specification v2",
+  "isBasedOn": "larp:polygon:0xdef456...",
+  "dateModified": "2025-11-01"
+}
+```
+
+### Credential Chains
+
+Institution anchors credential template:
+```json
+{
+  "@type": "EducationalOccupationalCredential",
+  "name": "Bachelor of Science",
+  "recognizedBy": {
+    "@type": "Organization",
+    "name": "Accreditation Board"
+  }
+}
+```
+
+Then issues individual credentials referencing the template:
+```json
+{
+  "@type": "EducationalOccupationalCredential",
+  "credentialSubject": {
+    "@type": "Person",
+    "name": "Bob Smith"
+  },
+  "about": "larp:ethereum:0x789abc...",
+  "dateIssued": "2025-06-15"
+}
+```
+
+### Verification
+
+To verify a referenced record:
+```bash
+# Extract txid from reference (larp:bsv:0xabc123...)
+prp verify --txid 0xabc123... --chain bsv
+
+# Or if you have the proof file
+prp verify referenced-record-proof.json
+```
+
+The referenced record is independently verifiable on its chain.
+
 ## Protocol Philosophy
 
 - **Data must be readable on-chain** - not just hashes that require off-chain lookups
