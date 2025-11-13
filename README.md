@@ -95,7 +95,7 @@ cat > photo-record.json << EOF
 EOF
 
 # Anchor normally
-prp anchor photo-record.json --chain bsv --key 0x...
+larp anchor photo-record.json --chain bsv --key 0x...
 ```
 
 ### Example: Anchoring a PDF
@@ -115,7 +115,7 @@ cat > contract-record.json << EOF
 EOF
 
 # Anchor
-prp anchor contract-record.json --chain bsv --key 0x...
+larp anchor contract-record.json --chain bsv --key 0x...
 ```
 
 ### Size and Cost Considerations
@@ -181,7 +181,7 @@ For transactions requiring mutual verification:
 
 **Seller anchors:**
 ```bash
-prp anchor property-sale.json --chain bsv --key 0xSELLER_KEY
+larp anchor property-sale.json --chain bsv --key 0xSELLER_KEY
 # Returns: txid abc123...
 ```
 
@@ -249,10 +249,10 @@ Then issues individual credentials referencing the template:
 To verify a referenced record:
 ```bash
 # Extract txid from reference (larp:bsv:0xabc123...)
-prp verify --txid 0xabc123... --chain bsv
+larp verify --txid 0xabc123... --chain bsv
 
 # Or if you have the proof file
-prp verify referenced-record-proof.json
+larp verify referenced-record-proof.json
 ```
 
 The referenced record is independently verifiable on its chain.
