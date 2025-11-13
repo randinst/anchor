@@ -5,16 +5,16 @@ export const BITCOIN_NETWORKS = {
   btc: {
     name: 'Bitcoin',
     network: bitcoin.networks.bitcoin,
-    maxDataSize: 76, // 80 bytes total, 4 for protocol ID
+    maxDataSize: 75, // 80 bytes total - 5 for "LARP1" = 75 bytes for data
     explorer: 'https://blockstream.info/tx/',
-    rpcUrl: 'https://blockstream.info/api' // Public API
+    rpcUrl: 'https://blockstream.info/api'
   },
   bch: {
     name: 'Bitcoin Cash',
     network: bitcoin.networks.bitcoin,
-    maxDataSize: 216, // 220 bytes total, 4 for protocol ID
+    maxDataSize: 215, // 220 bytes total - 5 for "LARP1" = 215 bytes for data
     explorer: 'https://blockchair.com/bitcoin-cash/transaction/',
-    rpcUrl: 'https://rest.bch.actorforth.org/v2' // Public API
+    rpcUrl: 'https://rest.bch.actorforth.org/v2'
   },
   bsv: {
     name: 'Bitcoin SV',
@@ -25,5 +25,5 @@ export const BITCOIN_NETWORKS = {
   }
 };
 
-// Protocol identifier: "LARP1" (same as EVM)
-export const PROTOCOL_ID = Buffer.from('LARP1', 'utf8');
+// Protocol identifier: "LARP1" → 5 bytes (0x4C41525031)
+export const PROTOCOL_ID = Buffer.from('LARP1', 'utf8'); 

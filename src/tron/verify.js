@@ -1,4 +1,4 @@
-﻿// verify.js - Verify Tron proofs
+﻿﻿// verify.js - Verify Tron proofs
 import TronWeb from 'tronweb';
 import { TRON_CONFIG, PROTOCOL_ID } from './config.js';
 

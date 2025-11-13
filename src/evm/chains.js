@@ -1,3 +1,4 @@
+// chains.js - Default RPCs and chain IDs for EVM chains
 export const DEFAULT_RPCS = {
   ethereum: 'https://eth.llamarpc.com',
   polygon: 'https://polygon-rpc.com',
@@ -17,4 +18,3 @@ export const CHAIN_IDS = {
   bsc: 56,
   avalanche: 43114
 };
-

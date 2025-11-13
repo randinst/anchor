@@ -1,5 +1,4 @@
 ﻿// config.js - Solana configuration
-
 export const SOLANA_CONFIG = {
   solana: {
     name: 'Solana Mainnet',

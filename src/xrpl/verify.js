@@ -27,8 +27,6 @@ async function verifyXRPProof(proof, customRpc = null) {
       transaction: txid
     });
     
-    await client.disconnect();
-    
     const tx = response.result;
     
     // Check if transaction was successful
@@ -75,9 +73,11 @@ async function verifyXRPProof(proof, customRpc = null) {
     }
     
   } catch (error) {
+    return { valid: false, reason: `Error connecting to XRP network: ${error.message}` };
+  } finally {
     await client.disconnect().catch(() => {});
-    return { valid: false, reason: error.message };
   }
 }
 
 export { verifyXRPProof };
+

@@ -29,11 +29,11 @@ async function anchorToXRP(data, chainName, secretKey, customRpc = null) {
   // 4. Connect to XRP network
   const rpcUrl = customRpc || config.rpcUrl;
   const client = new Client(rpcUrl);
-  await client.connect();
-  
-  console.log(`Connected to ${config.name}`);
   
   try {
+    await client.connect();
+    console.log(`Connected to ${config.name}`);
+    
     // 5. Setup wallet
     const wallet = Wallet.fromSecret(secretKey);
     console.log(`Using address: ${wallet.address}`);
@@ -42,12 +42,11 @@ async function anchorToXRP(data, chainName, secretKey, customRpc = null) {
     const memoData = dataBuffer.toString('hex').toUpperCase();
     
     // 7. Prepare payment transaction
-    // Send 1 drop (0.000001 XRP) to self with data in memo
     const prepared = await client.autofill({
       TransactionType: 'Payment',
       Account: wallet.address,
       Destination: wallet.address,
-      Amount: '1', // 1 drop
+      Amount: '1', // 1 drop (0.000001 XRP)
       Memos: [
         {
           Memo: {
@@ -65,8 +64,6 @@ async function anchorToXRP(data, chainName, secretKey, customRpc = null) {
     // 9. Submit to network
     console.log('\nSubmitting transaction...');
     const result = await client.submitAndWait(signed.tx_blob);
-    
-    await client.disconnect();
     
     if (result.result.meta.TransactionResult !== 'tesSUCCESS') {
       throw new Error(`Transaction failed: ${result.result.meta.TransactionResult}`);
@@ -88,9 +85,12 @@ async function anchorToXRP(data, chainName, secretKey, customRpc = null) {
     };
     
   } catch (error) {
-    await client.disconnect();
+    console.error('Error during transaction:', error.message);
     throw error;
+  } finally {
+    await client.disconnect().catch(() => {});
   }
 }
 
 export { anchorToXRP };
+

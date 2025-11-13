@@ -11,7 +11,7 @@ export const XRP_CONFIG = {
   xrptest: {
     name: 'XRP Testnet',
     network: 'testnet',
-    maxMemoSize: 1024,
+    maxMemoSize: 1024, // 1KB limit for memo field
     explorer: 'https://testnet.xrpl.org/transactions/',
     rpcUrl: 'wss://s.altnet.rippletest.net:51233'
   }
@@ -19,3 +19,4 @@ export const XRP_CONFIG = {
 
 // Protocol identifier: "LARP1" (same as others)
 export const PROTOCOL_ID = 'LARP1';
+
